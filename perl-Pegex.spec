@@ -4,7 +4,7 @@
 #
 Name     : perl-Pegex
 Version  : 0.70
-Release  : 7
+Release  : 8
 URL      : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.70.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.70.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libpegex-perl/libpegex-perl_0.67-2.debian.tar.xz
