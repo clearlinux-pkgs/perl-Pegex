@@ -4,7 +4,7 @@
 #
 Name     : perl-Pegex
 Version  : 0.70
-Release  : 14
+Release  : 15
 URL      : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.70.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.70.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libpegex-perl/libpegex-perl_0.67-2.debian.tar.xz
@@ -12,6 +12,7 @@ Summary  : 'Acmeist PEG Parser Framework'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Pegex-license = %{version}-%{release}
+Requires: perl-Pegex-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(File::ShareDir::Install)
 BuildRequires : perl(YAML::XS)
@@ -26,6 +27,7 @@ This document describes Pegex version 0.70.
 Summary: dev components for the perl-Pegex package.
 Group: Development
 Provides: perl-Pegex-devel = %{version}-%{release}
+Requires: perl-Pegex = %{version}-%{release}
 
 %description dev
 dev components for the perl-Pegex package.
@@ -39,18 +41,28 @@ Group: Default
 license components for the perl-Pegex package.
 
 
+%package perl
+Summary: perl components for the perl-Pegex package.
+Group: Default
+Requires: perl-Pegex = %{version}-%{release}
+
+%description perl
+perl components for the perl-Pegex package.
+
+
 %prep
 %setup -q -n Pegex-0.70
-cd ..
-%setup -q -T -D -n Pegex-0.70 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libpegex-perl_0.67-2.debian.tar.xz
+cd %{_builddir}/Pegex-0.70
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Pegex-0.70/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Pegex-0.70/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -60,7 +72,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -69,7 +81,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Pegex
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Pegex/LICENSE
+cp %{_builddir}/Pegex-0.70/LICENSE %{buildroot}/usr/share/package-licenses/perl-Pegex/883758993cc9a404b18936c49f4c6f4db25e763a
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -82,45 +94,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/API.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Base.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Bootstrap.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Bootstrap.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Compiler.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Compiler.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Grammar.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Grammar.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Grammar/Atoms.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Grammar/Atoms.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Input.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Input.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Miscellany.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Module.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Module.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Optimizer.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Overview.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Parser.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Parser.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Parser/Indent.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Pegex/AST.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Pegex/Grammar.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Pegex/Grammar.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Receiver.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Receiver.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Regex.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Regex.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Resources.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Syntax.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tree.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tree.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tree/Wrap.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tree/Wrap.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tutorial.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tutorial/Calculator.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Pegex/Tutorial/JSON.pod
-/usr/lib/perl5/vendor_perl/5.28.2/auto/share/dist/Pegex/pegex.pgx
 
 %files dev
 %defattr(-,root,root,-)
@@ -148,4 +121,46 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Pegex/LICENSE
+/usr/share/package-licenses/perl-Pegex/883758993cc9a404b18936c49f4c6f4db25e763a
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/API.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Base.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Bootstrap.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Bootstrap.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Compiler.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Compiler.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Grammar.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Grammar.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Grammar/Atoms.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Grammar/Atoms.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Input.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Input.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Miscellany.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Module.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Module.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Optimizer.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Overview.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Parser.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Parser.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Parser/Indent.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Pegex/AST.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Pegex/Grammar.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Pegex/Grammar.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Receiver.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Receiver.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Regex.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Regex.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Resources.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Syntax.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tree.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tree.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tree/Wrap.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tree/Wrap.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tutorial.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tutorial/Calculator.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Pegex/Tutorial/JSON.pod
+/usr/lib/perl5/vendor_perl/5.30.1/auto/share/dist/Pegex/pegex.pgx
