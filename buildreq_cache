@@ -1,3 +1,6 @@
-0.70
+0.72
 perl(File::ShareDir::Install)
+perl(JSON::XS)
+perl(Test::Pod)
+perl(Tie::IxHash)
 perl(YAML::XS)
