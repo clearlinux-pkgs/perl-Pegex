@@ -4,7 +4,7 @@
 #
 Name     : perl-Pegex
 Version  : 0.74
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.74.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.74.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libpegex-perl/libpegex-perl_0.67-2.debian.tar.xz
@@ -13,6 +13,8 @@ Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Pegex-license = %{version}-%{release}
 Requires: perl-Pegex-perl = %{version}-%{release}
+Requires: perl(JSON::PP)
+Requires: perl(YAML::PP)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(File::ShareDir::Install)
 BuildRequires : perl(Test::Pod)
