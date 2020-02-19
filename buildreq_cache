@@ -1,4 +1,4 @@
-0.74
+0.75
 perl(File::ShareDir::Install)
 perl(Test::Pod)
 perl(Tie::IxHash)
