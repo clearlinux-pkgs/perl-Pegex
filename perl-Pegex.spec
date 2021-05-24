@@ -4,10 +4,10 @@
 #
 Name     : perl-Pegex
 Version  : 0.75
-Release  : 23
+Release  : 24
 URL      : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.75.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/I/IN/INGY/Pegex-0.75.tar.gz
-Source1  : http://http.debian.net/debian/pool/main/libp/libpegex-perl/libpegex-perl_0.67-2.debian.tar.xz
+Source1  : http://http.debian.net/debian/pool/main/libp/libpegex-perl/libpegex-perl_0.75-1.debian.tar.xz
 Summary  : 'Acmeist PEG Parser Framework'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
@@ -57,7 +57,7 @@ perl components for the perl-Pegex package.
 %prep
 %setup -q -n Pegex-0.75
 cd %{_builddir}
-tar xf %{_sourcedir}/libpegex-perl_0.67-2.debian.tar.xz
+tar xf %{_sourcedir}/libpegex-perl_0.75-1.debian.tar.xz
 cd %{_builddir}/Pegex-0.75
 mkdir -p deblicense/
 cp -r %{_builddir}/debian/* %{_builddir}/Pegex-0.75/deblicense/
